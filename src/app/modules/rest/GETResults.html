@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <hr>
+    <h2>Results</h2>
+    <div data-loading-indicator
+         data-is-loading="operations.isLoading()"
+         data-font-size="'3em'"
+         data-message="'Loading results...'">
+        <div data-ng-if="result"
+             class="row">
+            <div class="col-xs-12">
+                <h4>URL: <span class="small"> {{ result.url }}</span></h4>
+            </div>
+            <div class="col-xs-6 col-md-3 text-center">
+                <p class="stat">
+                    <br/>
+                    {{ result.requestType }}
+                </p>
+                <p class="stat-caption">Request</p>
+            </div>
+            <div class="col-xs-6 col-md-3 text-center">
+                <p class="stat"
+                   data-ng-class="{'stat-danger': result.response.status && result.response.status !== 200,
+                                   'stat-success': result.response.status === 200}">
+                    <br/>
+                    {{ result.response.status }}
+                </p>
+                <p class="stat-caption">Status Code</p>
+            </div>
+            <div class="col-xs-6 col-md-3 text-center">
+                <p class="stat">
+                    <br/>
+                    {{ result.response.data.length }}
+                </p>
+                <p data-ng-if="result.response.type === 'json'" class="stat-caption"># Results</p>
+                <p data-ng-if="result.response.type === 'html'" class="stat-caption">Characters</p>
+            </div>
+            <div class="col-xs-6 col-md-3 text-center">
+                <p class="stat"
+                   data-ng-class="{'stat-danger': (result.timeTaken | date:'sss') >= 2000,
+                                   'stat-success': (result.timeTaken | date:'sss') < 2000}">
+                    <br/>
+                    {{ result.timeTaken | date:"sss"}}
+                </p>
+                <p class="stat-caption">Time Taken (MS)</p>
+            </div>
+        </div>
+        <div data-ng-if="result.response.type === 'json'"
+             class="row">
+            <div class="col-xs-12">
+                <div data-auto-table
+                     data-objects="result.response.data"></div>
+            </div>
+        </div>
+        <div data-ng-if="result.response.type === 'html'"
+             class="row">
+            <div class="col-xs-12">
+                <pre data-ng-bind="result.response.data"></pre>
+            </div>
+        </div>
+    </div>
+</div>

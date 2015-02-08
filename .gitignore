@@ -1,0 +1,9 @@
+.idea
+/src/app/*.min.js
+prod_dist
+src/app/modules/**/*.min.js
+src/app/*.min.js
+node_modules
+grunt_temp
+/app
+temp

@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <hr>
+            <h3>History</h3>
+            <div class="row">
+                <div class="col-xs-7">
+                    <div class="form-group has-feedback">
+                        <label class="control-label">&nbsp;</label>
+                        <input data-ng-model="search.criteria" class="form-control" placeholder="Search for..."/>
+                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="col-xs-5">
+                    <div data-pagination
+                         data-ng-model="pager.pageNumber"
+                         data-total-items="searchedResultsHistory.length"
+                         data-items-per-page="pager.itemsPerPage"
+                         data-max-size="pager.numPages"
+                         data-boundary-links="true"
+                         class="pull-right"></div>
+                </div>
+            </div>
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>Action</th>
+                    <th>ID</th>
+                    <th>Request</th>
+                    <th>URL</th>
+                    <th>Status</th>
+                    <th># Results</th>
+                    <th>Time Started</th>
+                    <th>Time Taken</th>
+                </tr>
+                <tr data-ng-repeat="result in searchedResultsHistory = (resultsHistory | filter:search.criteria) | orderBy:'timeStarted':true | TableFilter:pager.pageNumber:pager.itemsPerPage "
+                    data-ng-class="{'info':currentResultId === result.id,
+                                    'danger':result.response.status !== 200,
+                                    'success':result.response.status === 200}">
+                    <td>
+                        <button data-ng-click="view(result)"
+                                class="btn btn-default btn-xs">
+                            View
+                        </button>
+
+                    <td data-ng-bind="result.id"></td>
+                    <td data-ng-bind="result.requestType"></td>
+                    <td data-ng-bind="result.url"></td>
+                    <td data-ng-bind="result.response.status"></td>
+                    <td data-ng-bind="result.response.data.length"></td>
+                    <td data-ng-bind="result.timeStarted | date: 'hh:mm:ss:sss'"></td>
+                    <td data-ng-bind="result.timeTaken | date: 'sss'"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

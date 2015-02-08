@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-xs-7">
+        <div class="form-group has-feedback">
+            <label class="control-label">&nbsp;</label>
+            <input data-ng-model="search.criteria" class="form-control" placeholder="Search for..."/>
+            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+        </div>
+    </div>
+    <div class="col-xs-5">
+        <div data-pagination
+             data-ng-model="pager.pageNumber"
+             data-total-items="searchedObjects.length"
+             data-items-per-page="pager.itemsPerPage"
+             data-max-size="pager.numPages"
+             data-boundary-links="true"
+             class="pull-right"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table table-bordered table-striped table-condensed table-responsive">
+            <tr>
+                <th data-ng-repeat="header in generatedHeaders track by $index">
+                    {{ header }}
+                </th>
+            </tr>
+            <tr data-ng-repeat="object in searchedObjects = (objects | filter:search.criteria) | TableFilter:pager.pageNumber:pager.itemsPerPage ">
+                <td data-ng-repeat="header in generatedHeaders track by $index">
+                    <span data-ng-bind="object[header]"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

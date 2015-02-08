@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <div data-text-input-field
+                 data-label="URL"
+                 data-model="url">
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <label>Actions</label><br/>
+            <button data-ng-click="get(url)"
+                    class="btn btn-success">
+                GET
+            </button>
+            <button class="btn btn-primary"
+                    data-ng-disabled="true">
+                PUT
+            </button>
+            <button class="btn btn-info"
+                    data-ng-disabled="true">
+                POST
+            </button>
+            <button class="btn btn-danger"
+                    data-ng-disabled="true">
+                DELETE
+            </button>
+            <button data-ng-click="viewState.isViewingHistory = !viewState.isViewingHistory"
+                    class="btn btn-default">
+                <span data-ng-bind="viewState.isViewingHistory ? 'Hide Past Requests' : 'View Past Requests'"></span>
+            </button>
+        </div>
+    </div>
+</div>
+<div data-results-history
+     data-ng-if="viewState.isViewingHistory"
+     data-current-result-id="result.id"></div>
+<div data-ng-include data-src="'modules/rest/GETResults.html'"></div>

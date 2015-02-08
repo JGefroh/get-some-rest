@@ -1,7 +1,10 @@
 (function () {
     function Controller ($scope, NavigationService, RESTService) {
-        $scope.url = 'data/projects.json';
-        $scope.lastRequestedId = RESTService.getId();
+        $scope.request = {
+            parameters: [],
+            url: 'data/projects.json',
+            id: RESTService.getId()
+        };
 
         $scope.operations = {
             isGetting: false,
@@ -14,16 +17,27 @@
         };
 
         $scope.$on('resultsHistory.viewResult', function(event, result) {
-            $scope.result = result;
+            $scope.result = angular.copy(result);
+            $scope.request = angular.copy(result.request);
         });
 
-        $scope.get = function(url) {
+
+        $scope.removeParameter = function(parameter) {
+            var index = $scope.request.parameters.indexOf(parameter);
+            $scope.request.parameters.splice(index, 1);
+        };
+
+        $scope.addParameter = function(name, value) {
+            $scope.request.parameters.push({name:name, value:value});
+        };
+
+        $scope.get = function(request) {
             $scope.operations.isGetting = true;
-            $scope.lastRequestedId = RESTService.getId();
-            RESTService.get($scope.lastRequestedId, url).then(function(result) {
-                if (result.id === $scope.lastRequestedId) {
+            $scope.request.id = RESTService.getId();
+            RESTService.get(angular.copy(request)).then(function(result) {
+                $scope.operations.isGetting = false;
+                if (result.request.id === $scope.request.id) {
                     $scope.result = result;
-                    $scope.operations.isGetting = false;
                 }
             });
         };

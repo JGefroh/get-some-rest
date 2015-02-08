@@ -8,12 +8,12 @@
         <div data-ng-if="result"
              class="row">
             <div class="col-xs-12">
-                <h4>URL: <span class="small"> {{ result.url }}</span></h4>
+                <h4>URL: <span class="small"> {{ result.request.url }}</span></h4>
             </div>
             <div class="col-xs-6 col-md-3 text-center">
                 <p class="stat">
                     <br/>
-                    {{ result.requestType }}
+                    {{ result.request.type }}
                 </p>
                 <p class="stat-caption">Request</p>
             </div>

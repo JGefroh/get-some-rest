@@ -9,6 +9,9 @@ body {
 .navigationActive {
      border-bottom: 1px solid red;
 }
+.navbar-link {
+    text-decoration: underline;
+}
 
 /**Stats*/
 .stat {

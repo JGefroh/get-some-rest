@@ -16,7 +16,7 @@
         return {
             restrict: 'A',
             scope: {
-                currentResultId: '='
+                request: '='
             },
             templateUrl: 'ResultsHistory.html',
             controller: ['$scope', 'RESTService', Controller]

@@ -33,7 +33,7 @@
                     <th>Time Taken</th>
                 </tr>
                 <tr data-ng-repeat="result in searchedResultsHistory = (resultsHistory | filter:search.criteria) | orderBy:'timeStarted':true | TableFilter:pager.pageNumber:pager.itemsPerPage "
-                    data-ng-class="{'info':currentResultId === result.id,
+                    data-ng-class="{'info':request.id === result.request.id,
                                     'danger':result.response.status !== 200,
                                     'success':result.response.status === 200}">
                     <td>
@@ -42,9 +42,9 @@
                             View
                         </button>
 
-                    <td data-ng-bind="result.id"></td>
-                    <td data-ng-bind="result.requestType"></td>
-                    <td data-ng-bind="result.url"></td>
+                    <td data-ng-bind="result.request.id"></td>
+                    <td data-ng-bind="result.request.type"></td>
+                    <td data-ng-bind="result.request.url"></td>
                     <td data-ng-bind="result.response.status"></td>
                     <td data-ng-bind="result.response.data.length"></td>
                     <td data-ng-bind="result.timeStarted | date: 'hh:mm:ss:sss'"></td>

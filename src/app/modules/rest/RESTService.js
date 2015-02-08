@@ -3,14 +3,15 @@
         var self = this;
         this.resultsHistory = [];
         var lastUsedId = 0;
-        this.get = function(id, url) {
+        this.get = function(request) {
             var timeStarted = new Date();
-            return $http.get(url).then(function(response) {
+            request.type = 'GET';
+            return $http.get(request.url).then(function(response) {
                 var timeEnded =  new Date();
-                return createResult(id, url, 'GET', createLiteResponse(response), timeStarted, timeEnded);
+                return createResult(request, createLiteResponse(response), timeStarted, timeEnded);
             }, function(response) {
                 var timeEnded = new Date();
-                return createResult(id, url, 'GET', createLiteResponse(response), timeStarted, timeEnded);
+                return createResult(request, createLiteResponse(response), timeStarted, timeEnded);
             });
         };
 
@@ -32,12 +33,10 @@
             }
         }
 
-        function createResult(id, url, requestType, response, timeStarted, timeEnded) {
+        function createResult(request, response, timeStarted, timeEnded) {
             var result = {
-                id: id,
-                url: url,
+                request: request,
                 response: response,
-                requestType: requestType,
                 timeStarted: timeStarted,
                 timeTaken: timeEnded - timeStarted
             };

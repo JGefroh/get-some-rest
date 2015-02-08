@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <hr>
+            <h3>Configure Request</h3>
+            <div class="row">
+                <div class="col-xs-4">
+                    <label>&nbsp;</label>
+                    <br/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5">
+                    <label>Query Parameters</label>
+                    <table class="table table-bordered table-striped table-responsive table-condensed">
+                        <tr>
+                            <th class="col-xs-4">Actions
+                                <button data-ng-click="addParameter(paramName, paramValue)"
+                                        class="btn btn-default btn-block btn-xs">
+                                    <span class="fa fa-plus"></span>
+                                    Add
+                                </button>
+                            </th>
+                            <th class="col-xs-4">Name</th>
+                            <th class="col-xs-4">Value</th>
+                        </tr>
+                        <tr data-ng-repeat="parameter in request.parameters">
+                            <td>
+                                <button data-ng-click="removeParameter(parameter)"
+                                        class="btn btn-default btn-block btn-sm">
+                                    <span class="fa fa-remove"></span>
+                                    Remove
+                                </button>
+                            </td>
+                            <td>
+                                <input data-ng-model="parameter.name"
+                                       class="form-control input-sm">
+                            </td>
+                            <td>
+                                <input data-ng-model="parameter.value"
+                                       class="form-control input-sm">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-xs-7">
+                    <label>Body</label>
+                    <br/>
+                    <textarea data-ng-model="request.body" class="form-control" rows="10"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

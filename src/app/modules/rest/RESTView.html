@@ -1,14 +1,14 @@
 <div class="container">
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-5">
             <div data-text-input-field
                  data-label="URL"
-                 data-model="url">
+                 data-model="request.url">
             </div>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-7">
             <label>Actions</label><br/>
-            <button data-ng-click="get(url)"
+            <button data-ng-click="get(request)"
                     class="btn btn-success">
                 GET
             </button>
@@ -26,12 +26,17 @@
             </button>
             <button data-ng-click="viewState.isViewingHistory = !viewState.isViewingHistory"
                     class="btn btn-default">
-                <span data-ng-bind="viewState.isViewingHistory ? 'Hide Past Requests' : 'View Past Requests'"></span>
+                <span data-ng-bind="viewState.isViewingHistory ? 'Hide Past Requests' : 'Show Past Requests'"></span>
+            </button>
+            <button data-ng-click="viewState.isShowingRequestConfiguration = !viewState.isShowingRequestConfiguration"
+                    class="btn btn-default">
+                <span data-ng-bind="viewState.isShowingRequestConfiguration ? 'Hide Configuration' : 'Show Configuration'"></span>
             </button>
         </div>
     </div>
 </div>
+<div data-ng-include data-ng-if="viewState.isShowingRequestConfiguration" data-src="'modules/rest/RequestConfiguration.html'"></div>
 <div data-results-history
      data-ng-if="viewState.isViewingHistory"
-     data-current-result-id="result.id"></div>
+     data-request="request"></div>
 <div data-ng-include data-src="'modules/rest/GETResults.html'"></div>

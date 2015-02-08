@@ -16,6 +16,49 @@
             });
         };
 
+        this.put = function(request) {
+            var timeStarted = new Date();
+            request.type = 'PUT';
+            return $http.put(request.url, request.body).then(function(response) {
+                    var timeEnded =  new Date();
+                    return createResult(request, createLiteResponse(response), timeStarted, timeEnded);
+                }, function(response) {
+                    var timeEnded = new Date();
+                    return createResult(request, createLiteResponse(response), timeStarted, timeEnded);
+                });
+        };
+
+        this.deleteRequest = function(request) {
+            var timeStarted = new Date();
+            request.type = 'DELETE';
+
+            return $http(
+                {
+                    url: request.url,
+                    method: request.type
+                }
+            ).then(function(response) {
+                var timeEnded =  new Date();
+                return createResult(request, createLiteResponse(response), timeStarted, timeEnded);
+            }, function(response) {
+                var timeEnded = new Date();
+                return createResult(request, createLiteResponse(response), timeStarted, timeEnded);
+            });
+        };
+
+        this.post = function(request) {
+            var timeStarted = new Date();
+            request.type = 'POST';
+            return $http.post(request.url, request.body).then(function(response) {
+                var timeEnded =  new Date();
+                return createResult(request, createLiteResponse(response), timeStarted, timeEnded);
+            }, function(response) {
+                var timeEnded = new Date();
+                return createResult(request, createLiteResponse(response), timeStarted, timeEnded);
+            });
+        };
+
+
         this.getId = function() {
             return lastUsedId++;
         };

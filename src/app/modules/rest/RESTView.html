@@ -12,16 +12,16 @@
                     class="btn btn-success">
                 GET
             </button>
-            <button class="btn btn-primary"
-                    data-ng-disabled="true">
+            <button data-ng-click="put(request)"
+                    class="btn btn-primary">
                 PUT
             </button>
-            <button class="btn btn-info"
-                    data-ng-disabled="true">
+            <button data-ng-click="post(request)"
+                    class="btn btn-info">
                 POST
             </button>
             <button class="btn btn-danger"
-                    data-ng-disabled="true">
+                    data-ng-click="deleteRequest(request)">
                 DELETE
             </button>
             <button data-ng-click="viewState.isViewingHistory = !viewState.isViewingHistory"

@@ -41,6 +41,39 @@
                 }
             });
         };
+
+        $scope.post = function(request) {
+            $scope.operations.isPosting = true;
+            $scope.request.id = RESTService.getId();
+            RESTService.post(angular.copy(request)).then(function(result) {
+                $scope.operations.isPosting = false;
+                if (result.request.id === $scope.request.id) {
+                    $scope.result = result;
+                }
+            });
+        };
+
+        $scope.deleteRequest = function(request) {
+            $scope.operations.isDeleting = true;
+            $scope.request.id = RESTService.getId();
+            RESTService.deleteRequest(angular.copy(request)).then(function(result) {
+                $scope.operations.isDeleting = false;
+                if (result.request.id === $scope.request.id) {
+                    $scope.result = result;
+                }
+            });
+        };
+
+        $scope.put = function(request) {
+            $scope.operations.isPutting = true;
+            $scope.request.id = RESTService.getId();
+            RESTService.put(angular.copy(request)).then(function(result) {
+                $scope.operations.isPutting = false;
+                if (result.request.id === $scope.request.id) {
+                    $scope.result = result;
+                }
+            });
+        };
     }
 
     angular

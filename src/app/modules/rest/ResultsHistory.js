@@ -12,6 +12,10 @@
             $scope.view = function(result) {
                 $scope.$emit('resultsHistory.viewResult', result);
             };
+
+            $scope.isCurrent = function(request, result) {
+                return request.id === result.request.id
+            }
         }
         return {
             restrict: 'A',

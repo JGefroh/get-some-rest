@@ -6,6 +6,7 @@
         this.get = function(request) {
             var timeStarted = new Date();
             request.type = 'GET';
+            request.url = getURLWithParameters(request.url, request.parameters);
             return $http.get(request.url).then(function(response) {
                 var timeEnded =  new Date();
                 return createResult(request, createLiteResponse(response), timeStarted, timeEnded);
@@ -18,6 +19,22 @@
         this.getId = function() {
             return lastUsedId++;
         };
+
+        function getURLWithParameters(url, parameters) {
+            var urlWithParameters = url;
+            if (url.indexOf('?') === -1) {
+                urlWithParameters += '?'
+            }
+            angular.forEach(parameters, function(parameter, index) {
+                if (parameter.name && parameter.value) {
+                    if (urlWithParameters !== url + '?') {
+                        urlWithParameters += '&';
+                    }
+                    urlWithParameters += parameter.name + '=' + parameter.value;
+                }
+            });
+            return urlWithParameters;
+        }
 
         function createLiteResponse(response) {
             if (angular.isObject(response.data)) {
